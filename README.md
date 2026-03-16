@@ -118,6 +118,44 @@ Serialize and load detectors. Files are saved as `.npz` (numpy compressed). No p
 
 Calibrate directly from pre-extracted hidden state vectors. Useful for testing or custom extraction pipelines.
 
+## Use cases
+
+### Data curation
+
+Filter OOD samples before they enter your training dataset:
+
+```python
+detector = geood.calibrate(model, clean_samples, tokenizer=tokenizer)
+
+for text in new_data:
+    result = detector.detect(text, model=model, tokenizer=tokenizer)
+    if not result.is_ood:
+        dataset.append(text)
+```
+
+### Safety filtering
+
+Reject inputs outside your model's intended domain:
+
+```python
+detector = geood.calibrate(model, domain_examples, tokenizer=tokenizer, threshold=0.35)
+
+result = detector.detect(user_input, model=model, tokenizer=tokenizer)
+if result.is_ood:
+    return "This question is outside my area of expertise."
+```
+
+### Deployment monitoring
+
+Log and alert on distribution shift in production:
+
+```python
+result = detector.detect(request.text, model=model, tokenizer=tokenizer)
+metrics.record("ood_score", result.score)
+if result.is_ood:
+    logger.warning(f"OOD input detected: {result.explain()}")
+```
+
 ## How it works
 
 1. **Calibrate:** Run a forward pass on reference texts. Extract hidden states at candidate layers. Compute centroid, covariance, and intrinsic dimensionality. Auto-select the layer with highest representational capacity.
