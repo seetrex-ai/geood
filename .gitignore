@@ -1,0 +1,46 @@
+# Archives
+*.zip
+*.tar.gz
+
+# Compiled PDF (local only)
+paper/geood_paper.pdf
+
+# Overleaf convenience copies
+paper/figures/
+
+# LaTeX build artifacts
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.fdb_latexmk
+*.fls
+*.synctex.gz
+*.toc
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# Development files (local only)
+.claude/
+CLAUDE.md
+tasks/
+docs/superpowers/
+data/
+scripts/
+paper/
+figures/

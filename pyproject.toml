@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=68.0,<78"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "geood"
+version = "0.1.6"
+description = "Geometric OOD detection for LLM hidden states"
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{name = "Jesús Tabares Montilla", email = "research@seetrex.com"}]
+keywords = ["ood", "out-of-distribution", "detection", "llm", "geometry", "dimensionality", "mahalanobis"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+dependencies = [
+    "torch>=2.0,<4",
+    "transformers>=4.30,<5",
+    "numpy>=1.24,<3",
+    "accelerate>=0.20,<2",
+]
+
+[project.urls]
+Homepage = "https://github.com/seetrex-ai/geood"
+Paper = "https://zenodo.org/records/19039654"
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+markers = [
+    "slow: tests that download real models (run with --slow)",
+]
